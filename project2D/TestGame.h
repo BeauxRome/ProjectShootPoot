@@ -19,6 +19,7 @@ protected:
 	
 	aie::Font*			m_font;
 	aie::Texture*		m_shipTexture;
+	aie::Texture*		m_base;
 
 	float m_cameraX, m_cameraY;
 	float m_shipX, m_shipY;

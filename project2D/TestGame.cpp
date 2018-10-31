@@ -3,6 +3,7 @@
 #include "Font.h"
 #include "Input.h"
 #include <imgui.h>
+#include <iostream>
 TestGame::TestGame()
 {
 }
@@ -14,6 +15,7 @@ bool TestGame::startup()
 	renderer = new aie::Renderer2D();
 
 	m_shipTexture = new aie::Texture("./textures/Galaga_Fighter.png");
+	m_base = new aie::Texture("./textures/BasePHolder.png");
 
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
@@ -37,6 +39,7 @@ void TestGame::shutdown()
 {
 	delete m_font;
 	delete m_shipTexture;
+	delete m_base;
 	delete renderer;
 }
 
@@ -87,14 +90,18 @@ void TestGame::update(float deltaTime)
 
 	// These keys rotate the ship
 
+	//////// FORMULA FOR RADIANS (used rotation measurement) TO DEGREES
+	//////   1rad * 180/pi = 57.296 deg
+	//// 1 = 57.296
+
 	if (input->isKeyDown(aie::INPUT_KEY_KP_7))
 	{
-		m_rot += 1.0f *deltaTime;
+		m_rot += 2.0f *deltaTime;
 	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_KP_9))
 	{
-		m_rot -= 1.0f *deltaTime;
+		m_rot -= 2.0f *deltaTime;
 	}
 
 	////////////
@@ -122,7 +129,12 @@ void TestGame::draw()
 	// Draws the player ship
 
 	renderer->setUVRect(0, 0, 1, 1);
-	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, m_rot, 1);
+	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 50, 50, m_rot, 1);
+
+	renderer->setRenderColour(0, 0, 1, 1);
+	renderer->drawBox(m_shipX, m_shipY, 50, 50, m_rot, 2);
+
+	std::cout << m_rot << std::endl;
 
 	// Button does nothing, just exists for the most part
 
