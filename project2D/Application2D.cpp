@@ -22,6 +22,7 @@ bool Application2D::startup() {
 	
 	m_cameraX = 0;
 	m_cameraY = 0;
+	
 	m_timer = 0;
 
 	return true;
@@ -34,7 +35,7 @@ void Application2D::shutdown() {
 	delete m_shipTexture;
 	delete m_2dRenderer;
 }
-
+float ship2x, ship2y;
 void Application2D::update(float deltaTime) {
 
 	m_timer += deltaTime;
@@ -54,6 +55,31 @@ void Application2D::update(float deltaTime) {
 
 	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
 		m_cameraX += 500.0f * deltaTime;
+
+	//WASD will move the ship, I guess (for the time being)
+
+	if (input->isKeyDown(aie::INPUT_KEY_W))
+	{
+		m_shipY += 250.0f *deltaTime;
+		ship2y += 50 * deltaTime;
+	}
+		
+
+	if (input->isKeyDown(aie::INPUT_KEY_A))
+	{
+		m_shipX -= 250.0f *deltaTime;
+		ship2x -= 50;
+	}
+
+	if (input->isKeyDown(aie::INPUT_KEY_S))
+	{
+		m_shipY -= 250.0f *deltaTime;
+		ship2y -= 50 * deltaTime;
+	}
+		
+
+	if (input->isKeyDown(aie::INPUT_KEY_D))
+		m_shipX += 250.0f *deltaTime;
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -78,6 +104,14 @@ void Application2D::draw() {
 	// demonstrate spinning sprite
 	m_2dRenderer->setUVRect(0,0,1,1);
 	m_2dRenderer->drawSprite(m_shipTexture, 600, 400, 0, 0, m_timer, 1);
+
+
+	m_2dRenderer->setUVRect(0, 0, 1, 1);
+	m_2dRenderer->drawSprite(m_shipTexture, ship2x, ship2y, 0, 0, m_timer, 1);
+
+
+	m_2dRenderer->setUVRect(0, 0, 1, 1);
+	m_2dRenderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, m_timer, 1);
 
 	// draw a thin line
 	m_2dRenderer->drawLine(300, 300, 600, 400, 2, 1);
