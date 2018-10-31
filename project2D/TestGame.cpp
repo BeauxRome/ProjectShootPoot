@@ -53,7 +53,7 @@ void TestGame::update(float deltaTime)
 	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
 		m_cameraX += 500.0f * deltaTime;
 
-	//WASD will move the ship, I guess (for the time being)
+	// WASD will move the ship, I guess (for the time being)
 
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
@@ -77,6 +77,8 @@ void TestGame::update(float deltaTime)
 		m_shipX += 250.0f *deltaTime;
 	}
 
+	// These keys rotate the ship
+
 	if (input->isKeyDown(aie::INPUT_KEY_KP_7))
 	{
 		m_rot += 1.0f *deltaTime;
@@ -86,6 +88,17 @@ void TestGame::update(float deltaTime)
 	{
 		m_rot -= 1.0f *deltaTime;
 	}
+
+	////////////
+
+	//This will be for the firng of the projectile
+
+	if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+	{
+		;
+	}
+
+	////////////
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -100,6 +113,8 @@ void TestGame::draw()
 
 	renderer->setUVRect(0, 0, 1, 1);
 	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, m_rot, 1);
+
+	// Button does nothing, just exists for the most part
 
 	if (ImGui::Button("hello world"))
 	{
