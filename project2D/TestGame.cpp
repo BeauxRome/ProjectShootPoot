@@ -21,6 +21,7 @@ bool TestGame::startup()
 	m_cameraY = 0;
 	m_shipX = 600;
 	m_shipY = 400;
+	m_rot = 90;
 
 	m_timer = 0;
 
@@ -75,7 +76,16 @@ void TestGame::update(float deltaTime)
 	{
 		m_shipX += 250.0f *deltaTime;
 	}
-		
+
+	if (input->isKeyDown(aie::INPUT_KEY_KP_7))
+	{
+		m_rot += 1.0f *deltaTime;
+	}
+
+	if (input->isKeyDown(aie::INPUT_KEY_KP_9))
+	{
+		m_rot -= 1.0f *deltaTime;
+	}
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -89,7 +99,7 @@ void TestGame::draw()
 	renderer->begin();
 
 	renderer->setUVRect(0, 0, 1, 1);
-	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, 0, 1);
+	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, m_rot, 1);
 
 	if (ImGui::Button("hello world"))
 	{

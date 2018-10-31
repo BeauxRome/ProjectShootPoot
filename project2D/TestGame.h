@@ -22,5 +22,6 @@ protected:
 
 	float m_cameraX, m_cameraY;
 	float m_shipX, m_shipY;
+	float m_rot;
 	float m_timer;
 };
