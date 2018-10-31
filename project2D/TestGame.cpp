@@ -139,5 +139,14 @@ void TestGame::draw()
 	
 	}	
 
+	// Spawns bollit
+	aie::Input* input = aie::Input::getInstance();
+	if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+	{
+		renderer->setUVRect(0, 0, 1, 1);
+		renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, m_rot, 1);
+		m_bullet -= 25.0f;
+	}
+
 	renderer->end();
 }
