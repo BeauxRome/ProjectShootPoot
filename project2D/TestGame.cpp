@@ -21,7 +21,7 @@ bool TestGame::startup()
 	m_cameraY = 0;
 	m_shipX = 600;
 	m_shipY = 400;
-	m_rot = 90;
+	m_rot = 0;
 
 	m_timer = 0;
 
