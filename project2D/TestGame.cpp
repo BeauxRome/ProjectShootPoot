@@ -17,10 +17,15 @@ bool TestGame::startup()
 
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
+	// Coordinates of camera
 	m_cameraX = 0;
 	m_cameraY = 0;
+	
+	// Coordinates of the ship
 	m_shipX = 600;
 	m_shipY = 400;
+
+	// Rotation of ship
 	m_rot = 0;
 
 	m_timer = 0;
@@ -30,6 +35,9 @@ bool TestGame::startup()
 
 void TestGame::shutdown()
 {
+	delete m_font;
+	delete m_shipTexture;
+	delete renderer;
 }
 
 void TestGame::update(float deltaTime) 
@@ -110,6 +118,8 @@ void TestGame::draw()
 	this->clearScreen();
 	renderer->setCameraPos(m_cameraX, m_cameraY);
 	renderer->begin();
+
+	// Draws the player ship
 
 	renderer->setUVRect(0, 0, 1, 1);
 	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, m_rot, 1);
