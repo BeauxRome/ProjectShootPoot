@@ -20,9 +20,11 @@ protected:
 	aie::Renderer2D*	m_2dRenderer;
 	aie::Texture*		m_texture;
 	aie::Texture*		m_shipTexture;
+	aie::Texture*		m_bulletTexture; //Juan added
 	aie::Font*			m_font;
 
 	float m_cameraX, m_cameraY;
 	float m_shipX, m_shipY;
+	float m_bullet;
 	float m_timer;
 };

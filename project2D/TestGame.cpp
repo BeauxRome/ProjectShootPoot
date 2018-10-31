@@ -15,6 +15,8 @@ bool TestGame::startup()
 
 	m_shipTexture = new aie::Texture("./textures/Galaga_Fighter.png");
 
+	m_bulletTexture = new aie::Texture("./textures/bullet.png");//Juan added
+
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
@@ -24,6 +26,7 @@ bool TestGame::startup()
 	// Coordinates of the ship
 	m_shipX = 600;
 	m_shipY = 400;
+	m_bullet = 100;//Juan added
 
 	// Rotation of ship
 	m_rot = 0;
@@ -37,6 +40,7 @@ void TestGame::shutdown()
 {
 	delete m_font;
 	delete m_shipTexture;
+	delete m_bulletTexture;//Juan added
 	delete renderer;
 }
 
@@ -103,7 +107,7 @@ void TestGame::update(float deltaTime)
 
 	if (input->isKeyDown(aie::INPUT_KEY_SPACE))
 	{
-		;
+		m_bullet -= 0.0f*deltaTime; //Juan added
 	}
 
 	////////////
@@ -124,11 +128,15 @@ void TestGame::draw()
 	renderer->setUVRect(0, 0, 1, 1);
 	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, m_rot, 1);
 
+	// Draws bollit // Juan added
+	
+	renderer->setUVRect(0, 0, 1, 1); // Juan added
+	renderer->drawSprite(m_bulletTexture, m_bullet, 0); // Juan added
 	// Button does nothing, just exists for the most part
 
 	if (ImGui::Button("hello world"))
 	{
-
+	
 	}	
 
 	renderer->end();
