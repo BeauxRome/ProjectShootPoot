@@ -168,6 +168,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Fast.h" />
+    <ClInclude Include="Normal.h" />
+    <ClInclude Include="Normie.h" />
+    <ClInclude Include="Slow.h" />
     <ClInclude Include="TestGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
