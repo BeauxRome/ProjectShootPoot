@@ -26,7 +26,7 @@ bool TestGame::startup()
 	// Coordinates of the ship
 	m_shipX = 600;
 	m_shipY = 400;
-	m_bullet = 100;//Juan added
+	m_bullet = m_shipX;//Juan added;
 
 	// Rotation of ship
 	m_rot = 0;
@@ -49,6 +49,7 @@ void TestGame::update(float deltaTime)
 
 	m_timer += deltaTime;
 
+
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
@@ -70,23 +71,30 @@ void TestGame::update(float deltaTime)
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
 		m_shipY += 250.0f *deltaTime;
+		//m_bulletY += 250.0f *deltaTime;
 	}
 
+	
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
 		m_shipX -= 250.0f *deltaTime;
+		//m_bulletX -= 250.0f *deltaTime;
 	}
+
+
 
 	if (input->isKeyDown(aie::INPUT_KEY_S))
 	{
 		m_shipY -= 250.0f *deltaTime;
+		//m_bulletY -= 250.0f *deltaTime;
 	}
 
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
 		m_shipX += 250.0f *deltaTime;
+		//m_bulletX += 250.0f *deltaTime;
 	}
 
 	// These keys rotate the ship
@@ -105,10 +113,10 @@ void TestGame::update(float deltaTime)
 
 	//This will be for the firng of the projectile
 
-	if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+	/*if (input->isKeyDown(aie::INPUT_KEY_SPACE))
 	{
 		m_bullet -= 0.0f*deltaTime; //Juan added
-	}
+	}*/
 
 	////////////
 
@@ -130,8 +138,8 @@ void TestGame::draw()
 
 	// Draws bollit // Juan added
 	
-	renderer->setUVRect(0, 0, 1, 1); // Juan added
-	renderer->drawSprite(m_bulletTexture, m_bullet, 0); // Juan added
+	//renderer->setUVRect(0, 0, 1, 1); // Juan added
+	//renderer->drawSprite(m_bulletTexture, m_bullet, 0); // Juan added
 	// Button does nothing, just exists for the most part
 
 	if (ImGui::Button("hello world"))
@@ -140,13 +148,24 @@ void TestGame::draw()
 	}	
 
 	// Spawns bollit
-	aie::Input* input = aie::Input::getInstance();
-	if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+	aie::Input* input = aie::Input::getInstance(); //Juan added
+	
+	if (input->isKeyDown(aie::INPUT_KEY_SPACE))//Juan added
 	{
-		renderer->setUVRect(0, 0, 1, 1);
-		renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, m_rot, 1);
-		m_bullet -= 25.0f;
-	}
+		renderer->setUVRect(0, 0, 1, 1);//Juan added
+		renderer->drawSprite(m_bulletTexture, m_bullet, 0, 0);//Juan added
+		m_bullet += 25.0f;//Juan added
+		
+	} //fun fact, making this a while loop causes the program to freeze
+		//fun fact, while loops in general causes the program to freeze
 
+	if (input->isKeyUp(aie::INPUT_KEY_SPACE))//Juan added
+	{
+
+		m_bullet = m_shipX;//Juan added
+		//m_bullet = m_shipX && m_shipY;//Juan added
+	}
+	//Vectors won't help me
+	
 	renderer->end();
-}
+}  
