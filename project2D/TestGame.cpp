@@ -27,8 +27,6 @@ bool TestGame::startup()
 	m_shipX = 600;
 	m_shipY = 400;
 
-	// Rotation of ship
-	m_rot = 0;
 
 	m_timer = 0;
 
@@ -43,7 +41,7 @@ void TestGame::shutdown()
 	delete renderer;
 }
 
-void TestGame::update(float deltaTime) 
+void TestGame::update(float deltaTime)
 {
 
 	m_timer += deltaTime;
@@ -65,44 +63,44 @@ void TestGame::update(float deltaTime)
 		m_cameraX += 500.0f * deltaTime;
 
 	// WASD will move the ship, I guess (for the time being)
-
-	if (input->isKeyDown(aie::INPUT_KEY_W))
+	if (m_shipY <= 695)
 	{
-		m_shipY += 250.0f *deltaTime;
+		if (input->isKeyDown(aie::INPUT_KEY_W))
+		{
+			m_shipY += 250.0f *deltaTime;
+		}
 	}
 
-
-	if (input->isKeyDown(aie::INPUT_KEY_A))
+	if (m_shipX >= 25)
 	{
-		m_shipX -= 250.0f *deltaTime;
+		if (input->isKeyDown(aie::INPUT_KEY_A))
+		{
+			m_shipX -= 250.0f *deltaTime;
+		}
 	}
 
-	if (input->isKeyDown(aie::INPUT_KEY_S))
+	if (m_shipY >=25)
 	{
-		m_shipY -= 250.0f *deltaTime;
+		if (input->isKeyDown(aie::INPUT_KEY_S))
+		{
+			m_shipY -= 250.0f *deltaTime;
+		}
 	}
 
-
-	if (input->isKeyDown(aie::INPUT_KEY_D))
+	if (m_shipX <= 1255)
 	{
-		m_shipX += 250.0f *deltaTime;
-	}
+		if (input->isKeyDown(aie::INPUT_KEY_D))
+		{
+			m_shipX += 250.0f *deltaTime;
+		}
 
+	}
 	// These keys rotate the ship
 
 	//////// FORMULA FOR RADIANS (used rotation measurement) TO DEGREES
 	//////   1rad * 180/pi = 57.296 deg
 	//// 1 = 57.296
 
-	if (input->isKeyDown(aie::INPUT_KEY_KP_7))
-	{
-		m_rot += 2.0f *deltaTime;
-	}
-
-	if (input->isKeyDown(aie::INPUT_KEY_KP_9))
-	{
-		m_rot -= 2.0f *deltaTime;
-	}
 
 	////////////
 
@@ -117,9 +115,10 @@ void TestGame::update(float deltaTime)
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
+	{
 		quit();
+	}
 }
-
 void TestGame::draw()
 {
 	this->clearScreen();
@@ -129,12 +128,12 @@ void TestGame::draw()
 	// Draws the player ship
 
 	renderer->setUVRect(0, 0, 1, 1);
-	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 50, 50, m_rot, 1);
+	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 50, 50, 4.71239, 1);
 
 	renderer->setRenderColour(0, 0, 1, 1);
-	renderer->drawBox(m_shipX, m_shipY, 50, 50, m_rot, 2);
+	renderer->drawBox(m_shipX, m_shipY, 50, 50, 4.71239, 2);
 
-	std::cout << m_rot << std::endl;
+	renderer->setUVRect
 
 	// Button does nothing, just exists for the most part
 
