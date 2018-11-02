@@ -16,7 +16,7 @@ bool TestGame::startup()
 
 	m_shipTexture = new aie::Texture("./textures/Galaga_Fighter.png");
 	m_base = new aie::Texture("./textures/BasePHolder.png");
-
+	m_portal = new aie::Texture("./textures/Eldritch.png");
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
@@ -130,10 +130,11 @@ void TestGame::draw()
 	renderer->setUVRect(0, 0, 1, 1);
 	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 50, 50, 4.71239, 1);
 
-	renderer->setRenderColour(0, 0, 1, 1);
-	renderer->drawBox(m_shipX, m_shipY, 50, 50, 4.71239, 2);
-
-	renderer->setUVRect
+	//renderer->setRenderColour(0, 0, 1, 1);
+	//renderer->drawBox(m_shipX, m_shipY, 50, 50, 4.71239, 2);
+					  
+	renderer->setUVRect(0,0,1,1);	
+	renderer->drawSprite(m_portal, 1230, 360, (720/108)*m_portal->getWidth(), 920);
 
 	// Button does nothing, just exists for the most part
 
