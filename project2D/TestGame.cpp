@@ -153,7 +153,7 @@ void TestGame::draw()
 
 	// Draws the player bollit
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 1);//Juan added
+	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
 
 	if (ImGui::Button("hello world"))
 	{
