@@ -15,7 +15,7 @@ bool TestGame::startup()
 	renderer = new aie::Renderer2D();
 
 	m_shipTexture = new aie::Texture("./textures/Galaga_Fighter.png");
-	m_base = new aie::Texture("./textures/BasePHolder.png");
+	m_base = new aie::Texture("./textures/metriodoBlock.png");
 	m_portal = new aie::Texture("./textures/Eldritch.png");
 	m_bulletTexture = new aie::Texture("./textures/bullet.png");//Juan added
 	m_font = new aie::Font("./font/consolas.ttf", 32);
@@ -94,7 +94,7 @@ void TestGame::update(float deltaTime)
 		}
 	}
 
-	if (m_shipX <= 1255)
+	if (m_shipX <= 1115)
 	{
 		if (input->isKeyDown(aie::INPUT_KEY_D))
 		{
@@ -160,6 +160,9 @@ void TestGame::draw()
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
 	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
+
+	renderer->setUVRect(0, 0, 1, 1);
+	renderer->drawSprite(m_base, 0,360,720,720,4.71239,2);
 
 	// Button does nothing, just exists for the most part
 
