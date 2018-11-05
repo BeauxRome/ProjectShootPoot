@@ -24,6 +24,9 @@
     <ClCompile Include="TestGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h">
@@ -41,10 +44,16 @@
     <ClInclude Include="Normal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Normie.h">
+    <ClInclude Include="Slow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Slow.h">
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Standard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

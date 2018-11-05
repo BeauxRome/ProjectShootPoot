@@ -27,5 +27,6 @@ protected:
 	float m_shipX, m_shipY;
 	float m_rot;
 	float m_timer;
-	float m_bullet;// Juan added
+	float m_bulletX; //Juan added
+	float m_bulletY; //Juan added
 };
