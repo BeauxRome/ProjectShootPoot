@@ -17,6 +17,7 @@ bool TestGame::startup()
 	m_shipTexture = new aie::Texture("./textures/Galaga_Fighter.png");
 	m_base = new aie::Texture("./textures/BasePHolder.png");
 	m_portal = new aie::Texture("./textures/Eldritch.png");
+	m_bulletTexture = new aie::Texture("./textures/bullet.png");//Juan added
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
@@ -38,6 +39,7 @@ void TestGame::shutdown()
 	delete m_font;
 	delete m_shipTexture;
 	delete m_base;
+	delete m_bulletTexture;//Juan added
 	delete renderer;
 }
 
