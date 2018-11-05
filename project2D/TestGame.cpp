@@ -27,7 +27,8 @@ bool TestGame::startup()
 	// Coordinates of the ship
 	m_shipX = 600;
 	m_shipY = 400;
-
+	m_bulletX = 600; //Juan added
+	m_bulletY = 400; //Juam added
 
 	m_timer = 0;
 
@@ -47,6 +48,7 @@ void TestGame::update(float deltaTime)
 {
 
 	m_timer += deltaTime;
+
 
 	// input example
 	aie::Input* input = aie::Input::getInstance();
@@ -70,6 +72,7 @@ void TestGame::update(float deltaTime)
 		if (input->isKeyDown(aie::INPUT_KEY_W))
 		{
 			m_shipY += 250.0f *deltaTime;
+			m_bulletY += 250.0f *deltaTime;//Juan added
 		}
 	}
 
@@ -78,6 +81,7 @@ void TestGame::update(float deltaTime)
 		if (input->isKeyDown(aie::INPUT_KEY_A))
 		{
 			m_shipX -= 250.0f *deltaTime;
+			m_bulletX -= 250.0f *deltaTime;//Juan added
 		}
 	}
 
@@ -86,6 +90,7 @@ void TestGame::update(float deltaTime)
 		if (input->isKeyDown(aie::INPUT_KEY_S))
 		{
 			m_shipY -= 250.0f *deltaTime;
+			m_bulletY -= 250.0f *deltaTime;//Juan added
 		}
 	}
 
@@ -94,23 +99,38 @@ void TestGame::update(float deltaTime)
 		if (input->isKeyDown(aie::INPUT_KEY_D))
 		{
 			m_shipX += 250.0f *deltaTime;
+			m_bulletX += 250.0f *deltaTime;//Juan added
 		}
 
 	}
-	// These keys rotate the ship
-
-	//////// FORMULA FOR RADIANS (used rotation measurement) TO DEGREES
-	//////   1rad * 180/pi = 57.296 deg
-	//// 1 = 57.296
+	
 
 
 	////////////
 
 	//This will be for the firng of the projectile
 
-	if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+	if (input->isKeyDown(aie::INPUT_KEY_SPACE))//Juan added
 	{
-		;
+		if (m_bulletX <= 1280)
+		{
+			m_bulletX += 25.0f;//Juan added
+		}
+	}
+
+	if (input->isKeyUp(aie::INPUT_KEY_SPACE))//Juan added
+	{
+		if (m_bulletX <= 1280 && m_bulletX != m_shipX)
+		{
+			m_bulletX += 25.0f;//Juan added
+		}
+	}
+
+	if (m_bulletX >= 1280)
+	{
+		m_bulletX = m_shipX; //Juan added
+		m_bulletY = m_shipY; //Juam added
+
 	}
 
 	////////////
@@ -137,6 +157,9 @@ void TestGame::draw()
 					  
 	renderer->setUVRect(0,0,1,1);	
 	renderer->drawSprite(m_portal, 1230, 360, (720/108)*m_portal->getWidth(), 920);
+
+	renderer->setUVRect(0, 0, 1, 1);//Juan added
+	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
 
 	// Button does nothing, just exists for the most part
 

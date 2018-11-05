@@ -164,14 +164,17 @@
   <ItemGroup>
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ship.cpp" />
     <ClCompile Include="TestGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Fast.h" />
     <ClInclude Include="Normal.h" />
-    <ClInclude Include="Normie.h" />
+    <ClInclude Include="Standard.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="Slow.h" />
     <ClInclude Include="TestGame.h" />
   </ItemGroup>
