@@ -26,6 +26,8 @@ bool TestGame::startup()
 	// Coordinates of the ship
 	m_shipX = 600;
 	m_shipY = 400;
+	m_bulletX = 600;
+	m_bulletY = 400;
 	m_bullet = m_shipX;//Juan added;
 
 	// Rotation of ship
@@ -55,7 +57,7 @@ void TestGame::update(float deltaTime)
 
 	// use arrow keys to move camera
 	if (input->isKeyDown(aie::INPUT_KEY_UP))
-		m_cameraY += 500.0f * deltaTime;
+		m_cameraY += 500.0f * deltaTime;		
 
 	if (input->isKeyDown(aie::INPUT_KEY_DOWN))
 		m_cameraY -= 500.0f * deltaTime;
@@ -71,7 +73,7 @@ void TestGame::update(float deltaTime)
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
 		m_shipY += 250.0f *deltaTime;
-		//m_bulletY += 250.0f *deltaTime;
+		m_bulletY += 250.0f *deltaTime;
 	}
 
 	
@@ -79,7 +81,7 @@ void TestGame::update(float deltaTime)
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
 		m_shipX -= 250.0f *deltaTime;
-		//m_bulletX -= 250.0f *deltaTime;
+		m_bulletX -= 250.0f *deltaTime;
 	}
 
 
@@ -87,14 +89,14 @@ void TestGame::update(float deltaTime)
 	if (input->isKeyDown(aie::INPUT_KEY_S))
 	{
 		m_shipY -= 250.0f *deltaTime;
-		//m_bulletY -= 250.0f *deltaTime;
+		m_bulletY -= 250.0f *deltaTime;
 	}
 
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
 		m_shipX += 250.0f *deltaTime;
-		//m_bulletX += 250.0f *deltaTime;
+		m_bulletX += 250.0f *deltaTime;
 	}
 
 	// These keys rotate the ship
@@ -153,7 +155,8 @@ void TestGame::draw()
 	if (input->isKeyDown(aie::INPUT_KEY_SPACE))//Juan added
 	{
 		renderer->setUVRect(0, 0, 1, 1);//Juan added
-		renderer->drawSprite(m_bulletTexture, m_bullet, 0, 0);//Juan added
+		//renderer->drawSprite(m_bulletTexture, m_bullet, 0, 0);//Juan added
+		renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 1);//Juan added
 		m_bullet += 25.0f;//Juan added
 		
 	} //fun fact, making this a while loop causes the program to freeze
@@ -162,10 +165,11 @@ void TestGame::draw()
 	if (input->isKeyUp(aie::INPUT_KEY_SPACE))//Juan added
 	{
 
-		m_bullet = m_shipX;//Juan added
-		//m_bullet = m_shipX && m_shipY;//Juan added
+		m_bulletX = m_shipX;//Juan added
+		m_bulletY = m_shipY;
+		//m_bullet = m_shipX;//Juan added
 	}
-	//Vectors won't help me
+	
 	
 	renderer->end();
 }  
