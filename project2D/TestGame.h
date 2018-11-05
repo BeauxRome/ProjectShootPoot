@@ -21,6 +21,7 @@ protected:
 	aie::Texture*		m_shipTexture;
 	aie::Texture*		m_base;
 	aie::Texture*		m_bulletTexture;// Juan added
+	aie::Texture*		m_basicEnemy;
 	aie::Texture*		m_portal;
 
 	float m_cameraX, m_cameraY;
@@ -29,4 +30,7 @@ protected:
 	float m_timer;
 	float m_bulletX; //Juan added
 	float m_bulletY; //Juan added
+	float badiSpawn; //Juan added
+	float badiSpawnY;//Juan added
+	
 };

@@ -4,6 +4,7 @@
 #include "Input.h"
 #include <imgui.h>
 #include <iostream>
+#include <ctime>
 TestGame::TestGame()
 {
 }
@@ -18,6 +19,7 @@ bool TestGame::startup()
 	m_base = new aie::Texture("./textures/BasePHolder.png");
 	m_portal = new aie::Texture("./textures/Eldritch.png");
 	m_bulletTexture = new aie::Texture("./textures/bullet.png");//Juan added
+	m_basicEnemy = new aie::Texture("./textures/enemy.png");//Juan added
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
@@ -27,8 +29,18 @@ bool TestGame::startup()
 	// Coordinates of the ship
 	m_shipX = 600;
 	m_shipY = 400;
+
+	// Coordinates of bollit
 	m_bulletX = 600; //Juan added
-	m_bulletY = 400; //Juam added
+	m_bulletY = 400; //Juan added
+
+	// Coordinates of enemies
+	badiSpawn = 1200;
+	badiSpawnY = 400;
+
+	// Coordinates of meteors
+
+
 
 	m_timer = 0;
 
@@ -40,7 +52,8 @@ void TestGame::shutdown()
 	delete m_font;
 	delete m_shipTexture;
 	delete m_base;
-	delete m_bulletTexture;//Juan added
+	delete m_bulletTexture; //Juan added
+	delete m_basicEnemy; //Juan added
 	delete renderer;
 }
 
@@ -94,7 +107,7 @@ void TestGame::update(float deltaTime)
 		}
 	}
 
-	if (m_shipX <= 1255)
+	if (m_shipX <= 1115)
 	{
 		if (input->isKeyDown(aie::INPUT_KEY_D))
 		{
@@ -133,6 +146,24 @@ void TestGame::update(float deltaTime)
 
 	}
 
+
+	//Enemy stuff
+
+	srand(time(0));
+	int random = rand();
+	if (m_shipX <= 1120) //Juan added
+	{
+		badiSpawn -= 2.5f;//Juan added
+	}
+
+	if (badiSpawn <= 0)//Juan added
+	{
+		badiSpawn = 1280;//Juan added
+		badiSpawnY = rand() % 550 + 150;//Juan added
+	}
+
+
+
 	////////////
 
 	// exit the application
@@ -141,6 +172,9 @@ void TestGame::update(float deltaTime)
 		quit();
 	}
 }
+
+
+
 void TestGame::draw()
 {
 	this->clearScreen();
@@ -160,6 +194,9 @@ void TestGame::draw()
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
 	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
+
+	renderer->setUVRect(0, 0, 1, 1);//Juan added
+	renderer->drawSprite(m_basicEnemy, badiSpawn, badiSpawnY, 45, 45, 1.57f, 0);//Juan added
 
 	// Button does nothing, just exists for the most part
 
