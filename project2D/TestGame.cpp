@@ -157,7 +157,7 @@ void TestGame::draw()
 		renderer->setUVRect(0, 0, 1, 1);//Juan added
 		//renderer->drawSprite(m_bulletTexture, m_bullet, 0, 0);//Juan added
 		renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 1);//Juan added
-		m_bullet += 25.0f;//Juan added
+		m_bulletX += 25.0f;//Juan added
 		
 	} //fun fact, making this a while loop causes the program to freeze
 		//fun fact, while loops in general causes the program to freeze
