@@ -3,6 +3,7 @@
 #include "Font.h"
 #include "Input.h"
 #include <imgui.h>
+#include <iostream>
 TestGame::TestGame()
 {
 }
@@ -14,7 +15,9 @@ bool TestGame::startup()
 	renderer = new aie::Renderer2D();
 
 	m_shipTexture = new aie::Texture("./textures/Galaga_Fighter.png");
-
+	m_base = new aie::Texture("./textures/BasePHolder.png");
+	m_portal = new aie::Texture("./textures/Eldritch.png");
+	m_bulletTexture = new aie::Texture("./textures/bullet.png");//Juan added
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
@@ -25,8 +28,6 @@ bool TestGame::startup()
 	m_shipX = 600;
 	m_shipY = 400;
 
-	// Rotation of ship
-	m_rot = 0;
 
 	m_timer = 0;
 
@@ -37,10 +38,12 @@ void TestGame::shutdown()
 {
 	delete m_font;
 	delete m_shipTexture;
+	delete m_base;
+	delete m_bulletTexture;//Juan added
 	delete renderer;
 }
 
-void TestGame::update(float deltaTime) 
+void TestGame::update(float deltaTime)
 {
 
 	m_timer += deltaTime;
@@ -62,40 +65,44 @@ void TestGame::update(float deltaTime)
 		m_cameraX += 500.0f * deltaTime;
 
 	// WASD will move the ship, I guess (for the time being)
-
-	if (input->isKeyDown(aie::INPUT_KEY_W))
+	if (m_shipY <= 695)
 	{
-		m_shipY += 250.0f *deltaTime;
+		if (input->isKeyDown(aie::INPUT_KEY_W))
+		{
+			m_shipY += 250.0f *deltaTime;
+		}
 	}
 
-
-	if (input->isKeyDown(aie::INPUT_KEY_A))
+	if (m_shipX >= 25)
 	{
-		m_shipX -= 250.0f *deltaTime;
+		if (input->isKeyDown(aie::INPUT_KEY_A))
+		{
+			m_shipX -= 250.0f *deltaTime;
+		}
 	}
 
-	if (input->isKeyDown(aie::INPUT_KEY_S))
+	if (m_shipY >=25)
 	{
-		m_shipY -= 250.0f *deltaTime;
+		if (input->isKeyDown(aie::INPUT_KEY_S))
+		{
+			m_shipY -= 250.0f *deltaTime;
+		}
 	}
 
-
-	if (input->isKeyDown(aie::INPUT_KEY_D))
+	if (m_shipX <= 1255)
 	{
-		m_shipX += 250.0f *deltaTime;
-	}
+		if (input->isKeyDown(aie::INPUT_KEY_D))
+		{
+			m_shipX += 250.0f *deltaTime;
+		}
 
+	}
 	// These keys rotate the ship
 
-	if (input->isKeyDown(aie::INPUT_KEY_KP_7))
-	{
-		m_rot += 1.0f *deltaTime;
-	}
+	//////// FORMULA FOR RADIANS (used rotation measurement) TO DEGREES
+	//////   1rad * 180/pi = 57.296 deg
+	//// 1 = 57.296
 
-	if (input->isKeyDown(aie::INPUT_KEY_KP_9))
-	{
-		m_rot -= 1.0f *deltaTime;
-	}
 
 	////////////
 
@@ -110,9 +117,10 @@ void TestGame::update(float deltaTime)
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
+	{
 		quit();
+	}
 }
-
 void TestGame::draw()
 {
 	this->clearScreen();
@@ -122,7 +130,13 @@ void TestGame::draw()
 	// Draws the player ship
 
 	renderer->setUVRect(0, 0, 1, 1);
-	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 0, 0, m_rot, 1);
+	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 50, 50, 4.71239, 1);
+
+	//renderer->setRenderColour(0, 0, 1, 1);
+	//renderer->drawBox(m_shipX, m_shipY, 50, 50, 4.71239, 2);
+					  
+	renderer->setUVRect(0,0,1,1);	
+	renderer->drawSprite(m_portal, 1230, 360, (720/108)*m_portal->getWidth(), 920);
 
 	// Button does nothing, just exists for the most part
 
