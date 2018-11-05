@@ -115,13 +115,18 @@ void TestGame::update(float deltaTime)
 
 	if (input->isKeyDown(aie::INPUT_KEY_SPACE))//Juan added
 	{
-		m_bulletX += 25.0f;//Juan added
+		if (m_bulletX <= 1280)
+		{
+			m_bulletX += 25.0f;//Juan added
+		}
 	}
 
 	if (input->isKeyUp(aie::INPUT_KEY_SPACE))//Juan added
 	{
-		m_bulletX = m_shipX;//Juan added
-		m_bulletY = m_shipY;//Juan added
+		if (m_bulletX <= 1280 && m_bulletX != m_shipX)
+		{
+			m_bulletX += 25.0f;//Juan added
+		}
 	}
 
 	if (m_bulletX >= 1280)
