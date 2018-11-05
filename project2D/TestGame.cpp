@@ -124,6 +124,12 @@ void TestGame::update(float deltaTime)
 		m_bulletY = m_shipY;//Juan added
 	}
 
+	if (m_bulletX >= 1280)
+	{
+		m_bulletX = m_shipX; //Juan added
+		m_bulletY = m_shipY; //Juam added
+		
+	}
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
