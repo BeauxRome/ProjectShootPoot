@@ -31,7 +31,7 @@ protected:
 	float m_timer;
 	float m_bulletX; //Juan added
 	float m_bulletY; //Juan added
-	float m_bullet;// Juan added
+	//float m_bullet;// Juan added
 	//float x;//Juan added
 	//std::vector<float> bulletV; //Juan added
 };
