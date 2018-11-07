@@ -133,7 +133,7 @@ void TestGame::update(float deltaTime)
 
 	}
 
-	////////////
+
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -162,7 +162,7 @@ void TestGame::draw()
 	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
 
 	renderer->setUVRect(0, 0, 1, 1);
-	renderer->drawSprite(m_base, 0,360,720,720,4.71239,2);
+	renderer->drawSprite(m_base, -175,360,720,720,4.71239,2);
 
 	// Button does nothing, just exists for the most part
 
