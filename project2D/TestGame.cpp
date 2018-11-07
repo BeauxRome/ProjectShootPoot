@@ -38,8 +38,13 @@ bool TestGame::startup()
 
 	//Coordinates of meteors
 
-	meteoSpawn = 700;
-	meteoSpawnX = 800;
+	meteoSpawn = 700; //Juan added
+	meteoSpawnX = 800;//Juan added
+
+	// Coordinates of speedybois
+	//speedyboi = 1200; //Juan added
+	speedyboi = -1200; //Juan added
+	speedyboi = 400; //Juan added
 
 	// Rotation of ship
 	m_rot = 0;
@@ -55,6 +60,7 @@ void TestGame::shutdown()
 	delete m_shipTexture;
 	delete m_bulletTexture;//Juan added
 	delete m_meteorTexture; //Juan added
+	delete m_fastEnemy; //Juan added
 	delete renderer;
 }
 
@@ -161,6 +167,19 @@ void TestGame::update(float deltaTime)
 		meteoSpawn = 700;//Juan added
 		meteoSpawnX = rand() % 893 + 250;//Juan added
 		std::cout << meteoSpawnX << std::endl;
+	}
+
+	//speedyboi stuff
+
+	if (m_shipX <= 1120)//Juan added
+	{
+		speedyboi -= 25.0f;//Juan added
+	}
+
+	if (speedyboi <= -3000)//Juan added
+	{
+		speedyboi = 1200; //Juan added
+		speedyboiY = rand() % 
 	}
 
 	// exit the application
