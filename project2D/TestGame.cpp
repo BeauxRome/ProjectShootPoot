@@ -4,6 +4,9 @@
 #include "Input.h"
 #include <imgui.h>
 #include <iostream>
+#include <ctime>
+
+
 TestGame::TestGame()
 {
 }
@@ -18,6 +21,7 @@ bool TestGame::startup()
 	m_base = new aie::Texture("./textures/metriodoBlock.png");
 	m_portal = new aie::Texture("./textures/Eldritch.png");
 	m_bulletTexture = new aie::Texture("./textures/bullet.png");//Juan added
+	m_basicEnemy = new aie::Texture("./textures/enemy.png");//Juan added
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
@@ -30,6 +34,10 @@ bool TestGame::startup()
 	m_bulletX = 600; //Juan added
 	m_bulletY = 400; //Juam added
 
+	// Coordinates of enemies
+	badiSpawn = 1200;
+	badiSpawnY = 400;
+
 	m_timer = 0;
 
 	return true;
@@ -41,6 +49,7 @@ void TestGame::shutdown()
 	delete m_shipTexture;
 	delete m_base;
 	delete m_bulletTexture;//Juan added
+	delete m_basicEnemy; //Juan added
 	delete renderer;
 }
 
@@ -76,7 +85,7 @@ void TestGame::update(float deltaTime)
 		}
 	}
 
-	if (m_shipX >= 25)
+	if (m_shipX >= 220)
 	{
 		if (input->isKeyDown(aie::INPUT_KEY_A))
 		{
@@ -133,6 +142,34 @@ void TestGame::update(float deltaTime)
 
 	}
 
+	////////////
+
+	//Enemy Stuff
+
+	srand(time(0));
+	int random = rand();
+	if (m_shipX <= 1120) //Juan added
+	{
+		badiSpawn -= 2.5f;//Juan added
+	}
+
+	if (badiSpawn <= 0)//Juan added
+	{
+		badiSpawn = 1280;//Juan added
+		badiSpawnY = rand() % 550 + 150;//Juan added
+	}
+
+	
+	
+	////
+	
+	if (m_bulletX <= (badiSpawn - 100) && m_bulletX >= (badiSpawn + 100) && m_bulletY <= (badiSpawnY - 100) && m_bulletY <= (badiSpawnY + 100))
+	{
+		badiSpawn == -120;
+	}
+
+	////
+
 
 
 	// exit the application
@@ -163,6 +200,9 @@ void TestGame::draw()
 
 	renderer->setUVRect(0, 0, 1, 1);
 	renderer->drawSprite(m_base, -175,360,720,720,4.71239,2);
+
+	renderer->setUVRect(0, 0, 1, 1);//Juan added
+	renderer->drawSprite(m_basicEnemy, badiSpawn, badiSpawnY, 45, 45, 1.57f, 0);//Juan added
 
 	// Button does nothing, just exists for the most part
 
