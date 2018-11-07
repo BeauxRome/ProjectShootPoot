@@ -38,7 +38,7 @@ bool TestGame::startup()
 	badiSpawn = 1200;
 	badiSpawnY = 400;
 
-	// Coordinates of meteors
+
 
 
 
