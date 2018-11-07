@@ -20,6 +20,10 @@ bool TestGame::startup()
 
 	m_meteorTexture = new aie::Texture("./textures/rock_small.png");//Juan added
 
+	m_basicEnemy = new aie::Texture("./textures/enemy.png");//Juan added
+
+	m_fastEnemy = new aie::Texture("./textures/fast_enemy.png");//Juan added
+
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
