@@ -24,6 +24,7 @@ protected:
 	aie::Font*			m_font;
 	aie::Texture*		m_shipTexture;
 	aie::Texture*		m_bulletTexture;// Juan added
+	aie::Texture*		m_meteorTexture;// Juan added
 
 	float m_cameraX, m_cameraY;
 	float m_shipX, m_shipY;
@@ -31,4 +32,7 @@ protected:
 	float m_timer;
 	float m_bulletX; //Juan added
 	float m_bulletY; //Juan added
+	float meteoSpawn;//Juan added
+	float meteoSpawnX;//Jua added
+	
 };

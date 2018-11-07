@@ -3,6 +3,7 @@
 #include "Font.h"
 #include "Input.h"
 #include <imgui.h>
+#include <iostream>
 TestGame::TestGame()
 {
 }
@@ -17,6 +18,8 @@ bool TestGame::startup()
 
 	m_bulletTexture = new aie::Texture("./textures/bullet.png");//Juan added
 
+	m_meteorTexture = new aie::Texture("./textures/rock_small.png");//Juan added
+
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
@@ -28,6 +31,11 @@ bool TestGame::startup()
 	m_shipY = 400;
 	m_bulletX = 600; //Juan added
 	m_bulletY = 400; //Juam added
+
+	//Coordinates of meteors
+
+	meteoSpawn = 700;
+	meteoSpawnX = 800;
 
 	// Rotation of ship
 	m_rot = 0;
@@ -42,6 +50,7 @@ void TestGame::shutdown()
 	delete m_font;
 	delete m_shipTexture;
 	delete m_bulletTexture;//Juan added
+	delete m_meteorTexture; //Juan added
 	delete renderer;
 }
 
@@ -135,6 +144,21 @@ void TestGame::update(float deltaTime)
 		m_bulletY = m_shipY; //Juam added
 		
 	}
+
+	//Meteor stuff
+
+	if (m_shipX <= 1120)//Juan added
+	{
+		meteoSpawn -= 3.0f;//Juan added
+	}
+
+	if (meteoSpawn <= -200)//Juan added
+	{
+		meteoSpawn = 700;//Juan added
+		meteoSpawnX = rand() % 893 + 250;//Juan added
+		std::cout << meteoSpawnX << std::endl;
+	}
+
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
@@ -154,6 +178,9 @@ void TestGame::draw()
 	// Draws the player bollit
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
 	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
+
+	renderer->setUVRect(0, 0, 1, 1);//Juan added
+	renderer->drawSprite(m_meteorTexture, meteoSpawnX, meteoSpawn, 0, 0, 0, 0);//Juan added
 
 	if (ImGui::Button("hello world"))
 	{
