@@ -24,6 +24,8 @@ bool TestGame::startup()
 
 	m_fastEnemy = new aie::Texture("./textures/fast_enemy.png");//Juan added
 
+	m_bigEnemy = new aie::Texture("./textures/big_enemy.png");//Juan added
+
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
@@ -46,6 +48,11 @@ bool TestGame::startup()
 	speedyboi = -1200; //Juan added
 	speedyboi = 400; //Juan added
 
+	//Coordinates of beefybois
+
+	beefyboi = -1200;
+	beefyboiY = 400;
+
 	// Rotation of ship
 	m_rot = 0;
 
@@ -61,6 +68,7 @@ void TestGame::shutdown()
 	delete m_bulletTexture;//Juan added
 	delete m_meteorTexture; //Juan added
 	delete m_fastEnemy; //Juan added
+	delete m_bigEnemy; //Juan added
 	delete renderer;
 }
 
@@ -182,6 +190,19 @@ void TestGame::update(float deltaTime)
 		speedyboiY = rand() % 550 + 150;//Juan added
 	}
 
+	//beefyboi stuff
+
+	if (m_shipX <= 1120)//Juan added
+	{
+		beefyboi -= 1.0f;//Juan added
+	}
+
+	if (beefyboi <= -3000)//Juan added
+	{
+		beefyboi = 1200; //Juan added
+		beefyboiY = rand() % 550 + 150;//Juan added
+	}
+
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
@@ -206,7 +227,10 @@ void TestGame::draw()
 	renderer->drawSprite(m_meteorTexture, meteoSpawnX, meteoSpawn, 0, 0, 0, 0);//Juan added
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_fastEnemy, speedyboi, speedyboiY, 0, 0, 1.75f, 0);//Juan added
+	renderer->drawSprite(m_fastEnemy, speedyboi, speedyboiY, 0, 0, 1.7f, 0);//Juan added
+
+	renderer->setUVRect(0, 0, 1, 1);//Juan added
+	renderer->drawSprite(m_bigEnemy, beefyboi, beefyboiY, 1200, 1200, 1.7f, 0);//Juan added
 
 	if (ImGui::Button("hello world"))
 	{

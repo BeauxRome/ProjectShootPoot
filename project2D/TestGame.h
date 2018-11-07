@@ -27,6 +27,8 @@ protected:
 	aie::Texture*		m_meteorTexture;// Juan added
 	aie::Texture*		m_basicEnemy;// Juan added
 	aie::Texture*		m_fastEnemy;// Juan added
+	aie::Texture*		m_bigEnemy;// Juan added
+
 
 	float m_cameraX, m_cameraY;
 	float m_shipX, m_shipY;
@@ -38,7 +40,9 @@ protected:
 	float meteoSpawnX;//Jua added
 	float badiSpawn; //Juan added
 	float badiSpawnY;//Juan added
-	float speedyboi;//Juan  added
+	float speedyboi; //Juan added
 	float speedyboiY;//Juan added
+	float beefyboi;  //Juan added
+	float beefyboiY; //Juan added
 	
 };
