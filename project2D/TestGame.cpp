@@ -176,10 +176,10 @@ void TestGame::update(float deltaTime)
 		speedyboi -= 25.0f;//Juan added
 	}
 
-	if (speedyboi <= -3000)//Juan added
+	if (speedyboi <= -30000)//Juan added
 	{
 		speedyboi = 1200; //Juan added
-		speedyboiY = rand() % 
+		speedyboiY = rand() % 550 + 150;//Juan added
 	}
 
 	// exit the application
@@ -204,6 +204,9 @@ void TestGame::draw()
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
 	renderer->drawSprite(m_meteorTexture, meteoSpawnX, meteoSpawn, 0, 0, 0, 0);//Juan added
+
+	renderer->setUVRect(0, 0, 1, 1);//Juan added
+	renderer->drawSprite(m_fastEnemy, speedyboi, speedyboiY, 0, 0, 1.75f, 0);//Juan added
 
 	if (ImGui::Button("hello world"))
 	{
