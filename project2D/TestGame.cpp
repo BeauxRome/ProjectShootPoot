@@ -163,7 +163,8 @@ void TestGame::update(float deltaTime)
 	
 	////
 	
-	if (m_bulletX <= badiSpawn - 100 && m_bulletX >= badiSpawn + 100 && m_bulletY <= badiSpawnY - 100 && m_bulletY <= badiSpawnY + 100)
+	if (m_bulletX <= badiSpawn - 100 && m_bulletX >= badiSpawn + 100 && 
+		m_bulletY <= badiSpawnY - 100 && m_bulletY <= badiSpawnY + 100)
 	{
 		badiSpawn == 1200;
 	}
