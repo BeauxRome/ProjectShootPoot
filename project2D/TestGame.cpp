@@ -163,9 +163,9 @@ void TestGame::update(float deltaTime)
 	
 	////
 	
-	if (m_bulletX <= (badiSpawn - 100) && m_bulletX >= (badiSpawn + 100) && m_bulletY <= (badiSpawnY - 100) && m_bulletY <= (badiSpawnY + 100))
+	if (m_bulletX <= badiSpawn - 100 && m_bulletX >= badiSpawn + 100 && m_bulletY <= badiSpawnY - 100 && m_bulletY <= badiSpawnY + 100)
 	{
-		badiSpawn == -120;
+		badiSpawn == 1200;
 	}
 
 	////
@@ -199,10 +199,10 @@ void TestGame::draw()
 	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
 
 	renderer->setUVRect(0, 0, 1, 1);
-	renderer->drawSprite(m_base, -175,360,720,720,4.71239,2);
+	renderer->drawSprite(m_base, -175,360,720,720,4.71239,0);
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_basicEnemy, badiSpawn, badiSpawnY, 45, 45, 1.57f, 0);//Juan added
+	renderer->drawSprite(m_basicEnemy, badiSpawn, badiSpawnY, 45, 45, 1.57f, 1);//Juan added
 
 	// Button does nothing, just exists for the most part
 
