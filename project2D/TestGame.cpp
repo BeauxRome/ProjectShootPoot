@@ -38,9 +38,15 @@ bool TestGame::startup()
 	badiSpawn = 1200;
 	badiSpawnY = 400;
 
+	m_scoreboard = 0;
 	m_timer = 0;
 
 	return true;
+}
+
+int TestGame::SpeedModifier()
+{
+	return (m_scoreboard < 1000) ? 1 : m_scoreboard / 1000;
 }
 
 void TestGame::shutdown()
@@ -150,7 +156,7 @@ void TestGame::update(float deltaTime)
 	int random = rand();
 	if (m_shipX <= 1120) //Juan added
 	{
-		badiSpawn -= 2.5f;//Juan added
+		badiSpawn -= 2.5f*SpeedModifier();//Juan added, adjusted by moi
 	}
 
 	if (badiSpawn <= 0)//Juan added
@@ -162,12 +168,30 @@ void TestGame::update(float deltaTime)
 	
 	
 	////
-	
-	if (m_bulletX <= badiSpawn - 100 && m_bulletX >= badiSpawn + 100 && 
-		m_bulletY <= badiSpawnY - 100 && m_bulletY <= badiSpawnY + 100)
-	{
-		badiSpawn == 1200;
-	}
+
+	////////THIS IS HOPEFULLY GOING TO BE PUT IN WHEN THINGS ARE SET
+
+	//while (currentBullet != nullptr)
+	//{
+	//	if (m_bulletX <= badiSpawn - 100 && m_bulletX >= badiSpawn + 100 &&
+	//		m_bulletY <= badiSpawnY - 100 && m_bulletY <= badiSpawnY + 100)
+	//	{
+	//		badiSpawn == 1200;
+	//	}
+
+	//	if (currentBullet.xCheck() <= badiSpawn - 100 && currentBullet.xCheck() >= badiSpawn + 100
+	//		&& currentBullet.yCheck() <= badiSpawnY - 100 && currentBullet.yCheck() <= badiSpawnY + 100)
+	//	{
+	//		deleteNode(currentBullet);
+	//		badiSpawn = 1280;
+	//		badiSpawnY = rand() % 550 + 150;//Juan added
+	//		m_scoreboard += 100;
+	//	}
+	//	else
+	//	{
+	//		currentBullet = currentBullet->next;
+	//	}
+	//}
 
 	////
 

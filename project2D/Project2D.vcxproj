@@ -174,11 +174,15 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Fast.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LinkListIterator.h" />
     <ClInclude Include="Normal.h" />
     <ClInclude Include="Standard.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Slow.h" />
     <ClInclude Include="TestGame.h" />
+    <ClInclude Include="UnorderedLinkList.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

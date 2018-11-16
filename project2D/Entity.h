@@ -13,7 +13,6 @@ protected:
 	//__________
 	//   10     
 	// added to the speed of all enemies
-	int ScoreModifier;
 public:
 	// enemy taking damage
 	virtual int TakeDamage() = 0;

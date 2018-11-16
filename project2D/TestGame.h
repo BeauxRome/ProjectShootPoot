@@ -13,6 +13,10 @@ public:
 	virtual void update(float deltaTime) override;
 	virtual void draw() override;
 
+	//extra
+
+	int SpeedModifier();
+
 	aie::Renderer2D* renderer;
 
 protected:
@@ -27,6 +31,7 @@ protected:
 	float m_cameraX, m_cameraY;
 	float m_shipX, m_shipY;
 	float m_rot;
+	int m_scoreboard;
 	float m_timer;
 	float m_bulletX; //Juan added
 	float m_bulletY; //Juan added

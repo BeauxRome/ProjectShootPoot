@@ -1,9 +1,8 @@
 #pragma once
+#include "Vector2D.h"
 
-class Bullet
+struct Bullet : public Vector2D
 {
-private:
-	Vector2D bulletCoor;
-public:
-
+	Vector2D position;
+	Vector2D* next;
 };
