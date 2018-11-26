@@ -58,6 +58,10 @@ bool TestGame::startup()
 
 	m_timer = 0;
 
+	// Hit Boxy 
+
+
+
 	return true;
 }
 
@@ -203,6 +207,8 @@ void TestGame::update(float deltaTime)
 		beefyboiY = rand() % 550 + 150;//Juan added
 	}
 
+	
+	
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
@@ -227,10 +233,10 @@ void TestGame::draw()
 	renderer->drawSprite(m_meteorTexture, meteoSpawnX, meteoSpawn, 0, 0, 0, 0);//Juan added
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_fastEnemy, speedyboi, speedyboiY, 0, 0, 1.7f, 0);//Juan added
+	renderer->drawSprite(m_fastEnemy, speedyboi, speedyboiY, 0, 0, 1.57f, 0);//Juan added
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_bigEnemy, beefyboi, beefyboiY, 1200, 1200, 1.7f, 0);//Juan added
+	renderer->drawSprite(m_bigEnemy, beefyboi, beefyboiY, 1200, 1200, 1.57f, 0);//Juan added
 
 	if (ImGui::Button("hello world"))
 	{
