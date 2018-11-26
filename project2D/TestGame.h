@@ -37,4 +37,4 @@ protected:
 	float m_bulletY; //Juan added
 	float badiSpawn; //Juan added
 	float badiSpawnY;//Juan added
-};
+};    

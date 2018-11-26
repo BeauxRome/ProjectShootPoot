@@ -32,7 +32,7 @@ bool TestGame::startup()
 	m_shipX = 600;
 	m_shipY = 400;
 	m_bulletX = 600; //Juan added
-	m_bulletY = 400; //Juam added
+	m_bulletY = 400; //Juan added
 
 	// Coordinates of enemies
 	badiSpawn = 1200;
