@@ -31,6 +31,7 @@ protected:
 	aie::Texture*		m_livesTexture;//Juan added
 	aie::Texture*		m_livesTexture2;//Juan added
 	aie::Texture*		m_livesTexture3;//Juan added
+	aie::Texture*		m_gameOver;// Juasn added
 
 
 
@@ -54,6 +55,7 @@ protected:
 	float somelivesY2;//Jua added
 	float somelives3; //Jua added
 	float somelivesY3;//Jua added
+	float deadboi;	 //Juan added
 
 
 

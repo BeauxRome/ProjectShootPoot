@@ -32,6 +32,8 @@ bool TestGame::startup()
 
 	m_bigEnemy = new aie::Texture("./textures/big_enemy.png");//Juan added
 
+	m_gameOver = new aie::Texture("./textures/GameOver.png");// Juamn added
+
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	// Coordinates of camera
@@ -78,6 +80,9 @@ bool TestGame::startup()
 	somelives3 = 60;
 	somelivesY3 = 800;
 
+	// dead boxy
+
+	deadboi = 600;
 	return true;
 }
 
@@ -92,6 +97,7 @@ void TestGame::shutdown()
 	delete m_livesTexture;//Juan added
 	delete m_livesTexture2;//Juan added
 	delete m_livesTexture3;//Juan added
+	delete m_gameOver;//Juan added
 	delete renderer;
 }
 
@@ -254,13 +260,13 @@ void TestGame::draw()
 	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_meteorTexture, meteoSpawnX, meteoSpawn, 0, 0, 0, 0);//Juan added
+	renderer->drawSprite(m_meteorTexture, meteoSpawnX, meteoSpawn, 0, 0, 0, 1);//Juan added
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_fastEnemy, speedyboi, speedyboiY, 0, 0, 1.57f, 0);//Juan added
+	renderer->drawSprite(m_fastEnemy, speedyboi, speedyboiY, 0, 0, 1.57f, 1);//Juan added
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_bigEnemy, beefyboi, beefyboiY, 1200, 1200, 1.57f, 0);//Juan added
+	renderer->drawSprite(m_bigEnemy, beefyboi, beefyboiY, 1200, 1200, 1.57f, 1);//Juan added
 
 	//Draws the health
 
@@ -272,6 +278,13 @@ void TestGame::draw()
 
 	renderer->setUVRect(0, 0, 1, 1);
 	renderer->drawSprite(m_livesTexture3, somelives3, somelivesY3, 25, 25, m_rot, 1);
+	
+
+	// myeetrra
+
+	//renderer->setUVRect(0, 0, 1, 1);
+	//renderer->drawSprite(m_gameOver, deadboi, 400, 1500, 1200, m_rot, 0);
+
 	
 
 	if (ImGui::Button("hello world"))
