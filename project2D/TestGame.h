@@ -1,6 +1,9 @@
 #pragma once
 #include "Application.h"
 #include "Renderer2D.h"
+#include "UnorderedLinkList.h"
+#include "Bullet.h"
+#include "LinkedList.h"
 
 class TestGame : public aie::Application
 {
@@ -35,6 +38,7 @@ protected:
 	float m_timer;
 	float m_bulletX; //Juan added
 	float m_bulletY; //Juan added
+	UnorderedLinkedList<Bullet> bulletClub;
 	float badiSpawn; //Juan added
 	float badiSpawnY;//Juan added
 };

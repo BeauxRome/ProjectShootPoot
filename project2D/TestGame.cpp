@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
+#include "Node.h"
 #include <imgui.h>
 #include <iostream>
 #include <ctime>
@@ -127,9 +128,27 @@ void TestGame::update(float deltaTime)
 
 	if (input->isKeyDown(aie::INPUT_KEY_SPACE))//Juan added
 	{
-		if (m_bulletX <= 1280)
+		Bullet* newBullet=new Bullet;
+		
+		newBullet->position->setX (m_shipX);
+		newBullet->position->setY (m_shipY);
+		bulletClub.insertFirst(*newBullet);
+
+		int bulletdelay = 0;
+
+		if (bulletdelay <= 100)
 		{
-			m_bulletX += 25.0f;//Juan added
+			bulletdelay += deltaTime;
+		}
+		else
+		{
+			Bullet* newBullet=new Bullet;
+			
+			newBullet->position->setX(m_shipX);
+			newBullet->position->setY(m_shipY);
+			bulletClub.insertFirst(*newBullet);
+
+			int bulletdelay = 0;
 		}
 	}
 
@@ -220,8 +239,25 @@ void TestGame::draw()
 	renderer->setUVRect(0,0,1,1);	
 	renderer->drawSprite(m_portal, 1230, 360, (720/108)*m_portal->getWidth(), 920);
 
+	//Create a loop that will print each bullet on the screen, avoiding the nullptr
+
+	if (bulletClub.begin != nullptr)
+	{
+		Node& currPrint = bulletClub.begin;
+		do
+		{
+			renderer->setUVRect(0, 0, 1, 1);//Juan added
+			renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
+			currPrint = currPrint->mNext;
+		} while (currPrint!=nullptr);
+	}
+
+	//// v   <- that's gonna get got
+
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
 	renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
+
+	////
 
 	renderer->setUVRect(0, 0, 1, 1);
 	renderer->drawSprite(m_base, -175,360,720,720,4.71239,0);

@@ -3,33 +3,33 @@
 class Vector2D
 {
 protected:
-	int yCoor;
-	int xCoor;
+	float yCoor;
+	float xCoor;
 public:
-	void setY(int yVal)
+	void setY(float yVal)
 	{
 		yCoor = yVal;
 	}
-	void setX(int xVal)
+	void setX(float xVal)
 	{
 		xCoor=xVal;
 	}
 
-	int yCheck()
+	float yCheck()
 	{
 		return yCoor;
 	}
-	int xCheck()
+	float xCheck()
 	{
 		return xCoor;
 	}
 	
-	int yMove(int shiftNum)
+	float yMove(float shiftNum)
 	{
 		yCoor = yCoor + shiftNum;
 		return yCoor;
 	}
-	int xMove(int shiftNum)
+	float xMove(float shiftNum)
 	{
 		xCoor = xCoor + shiftNum;
 		return xCoor;

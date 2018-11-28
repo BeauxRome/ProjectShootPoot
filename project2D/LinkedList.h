@@ -1,4 +1,6 @@
 #pragma once
+#include "LinkListIterator.h"
+#include "Node.h"
 
 ////THIS IS A PLACEHOLDER FOR POSSIBLE CHANGES TO THE LINKLIST CODE
 
@@ -35,7 +37,7 @@ public:
 
 	////////////////PROBABLY WON'T NEED THIS SHIT
 
-	/*void print() const
+	void print() const
 	{
 		Node<T>*currPlace = new Node<T>;
 		currPlace = first;
@@ -44,7 +46,7 @@ public:
 			std::cout << currPlace->mData << std::endl;
 			currPlace = currPlace->mNext;
 		}
-	}*/
+	}
 
 	int length() const
 	{

@@ -1,5 +1,6 @@
 #pragma once
 #include "Bullet.h"
+#include "Node.h"
 
 ////THIS IS A PLACEHOLDER FOR POSSIBLE CHANGES TO THE LINKLIST CODE
 
