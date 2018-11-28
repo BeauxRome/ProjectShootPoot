@@ -41,4 +41,4 @@ protected:
 	UnorderedLinkedList<Bullet> bulletClub;
 	float badiSpawn; //Juan added
 	float badiSpawnY;//Juan added
-};
+};    
