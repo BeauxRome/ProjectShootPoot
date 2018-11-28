@@ -241,15 +241,14 @@ void TestGame::draw()
 
 	//Create a loop that will print each bullet on the screen, avoiding the nullptr
 
-	if (bulletClub.begin != nullptr)
+	if (bulletClub.begin() != nullptr)
 	{
-		Node& currPrint = bulletClub.begin;
 		do
 		{
 			renderer->setUVRect(0, 0, 1, 1);//Juan added
 			renderer->drawSprite(m_bulletTexture, m_bulletX, m_bulletY, 0, 0, m_rot, 2);//Juan added
-			currPrint = currPrint->mNext;
-		} while (currPrint!=nullptr);
+			bulletClub.begin()++;
+		} while (bulletClub.begin() !=nullptr);
 	}
 
 	//// v   <- that's gonna get got
