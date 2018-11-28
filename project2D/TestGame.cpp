@@ -16,6 +16,12 @@ bool TestGame::startup()
 
 	m_shipTexture = new aie::Texture("./textures/Galaga_Fighter.png");
 
+	m_livesTexture = new aie::Texture("./textures/Lives.png");//Juan added
+
+	m_livesTexture2 = new aie::Texture("./textures/Lives.png");//Juan added
+
+	m_livesTexture3 = new aie::Texture("./textures/Lives.png");//Juan added
+
 	m_bulletTexture = new aie::Texture("./textures/bullet.png");//Juan added
 
 	m_meteorTexture = new aie::Texture("./textures/rock_small.png");//Juan added
@@ -61,6 +67,16 @@ bool TestGame::startup()
 	// Hit Boxy 
 
 
+	// life boxy
+
+	somelives = 0;
+	somelivesY = 800;
+
+	somelives2 = 30;
+	somelivesY2 = 800;
+
+	somelives3 = 60;
+	somelivesY3 = 800;
 
 	return true;
 }
@@ -73,6 +89,9 @@ void TestGame::shutdown()
 	delete m_meteorTexture; //Juan added
 	delete m_fastEnemy; //Juan added
 	delete m_bigEnemy; //Juan added
+	delete m_livesTexture;//Juan added
+	delete m_livesTexture2;//Juan added
+	delete m_livesTexture3;//Juan added
 	delete renderer;
 }
 
@@ -207,11 +226,16 @@ void TestGame::update(float deltaTime)
 		beefyboiY = rand() % 550 + 150;//Juan added
 	}
 
+	// healthyboi stuff
+
+	
+
 	
 	
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
+
 }
 
 void TestGame::draw()
@@ -237,6 +261,18 @@ void TestGame::draw()
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
 	renderer->drawSprite(m_bigEnemy, beefyboi, beefyboiY, 1200, 1200, 1.57f, 0);//Juan added
+
+	//Draws the health
+
+	renderer->setUVRect(0, 0, 1, 1);
+	renderer->drawSprite(m_livesTexture, somelives, somelivesY, 25, 25, m_rot, 1);
+
+	renderer->setUVRect(0, 0, 1, 1);
+	renderer->drawSprite(m_livesTexture2, somelives2, somelivesY2, 25, 25, m_rot, 1);
+
+	renderer->setUVRect(0, 0, 1, 1);
+	renderer->drawSprite(m_livesTexture3, somelives3, somelivesY3, 25, 25, m_rot, 1);
+	
 
 	if (ImGui::Button("hello world"))
 	{

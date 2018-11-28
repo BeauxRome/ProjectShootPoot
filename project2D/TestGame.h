@@ -28,6 +28,10 @@ protected:
 	aie::Texture*		m_basicEnemy;// Juan added
 	aie::Texture*		m_fastEnemy;// Juan added
 	aie::Texture*		m_bigEnemy;// Juan added
+	aie::Texture*		m_livesTexture;//Juan added
+	aie::Texture*		m_livesTexture2;//Juan added
+	aie::Texture*		m_livesTexture3;//Juan added
+
 
 
 	float m_cameraX, m_cameraY;
@@ -44,5 +48,13 @@ protected:
 	float speedyboiY;//Juan added
 	float beefyboi;  //Juan added
 	float beefyboiY; //Juan added
-	
+	float somelives; //Juan added
+	float somelivesY;//Juan added
+	float somelives2; //Jua added
+	float somelivesY2;//Jua added
+	float somelives3; //Jua added
+	float somelivesY3;//Jua added
+
+
+
 };
