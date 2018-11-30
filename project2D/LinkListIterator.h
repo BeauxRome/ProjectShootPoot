@@ -29,10 +29,10 @@ public:
 	}
 	bool operator == (const linkedListIterator<T>& rhs) const
 	{
-		return this->mData == rhs.mData;
+		return this->current->mData == rhs.current->mData;
 	}
 	bool operator != (const linkedListIterator<T>& rhs) const
 	{
-		return this->mData != rhs.mData;
+		return this->current->mData != rhs.current->mData;
 	}
 };

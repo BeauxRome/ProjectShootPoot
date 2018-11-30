@@ -30,8 +30,15 @@ public:
 	void insertFirst(const T& newVal)
 	{
 		Node<T>*newNode = new Node<T>{ newVal };
+		if (this->isEmptyList() == true)
+		{
+			this->first = newNode;
+			this->last = newNode;
+			this->last->mNext = nullptr;
+		}
 		newNode->mNext = this->first;
 		this->first = newNode;
+		count++;
 	}
 
 
@@ -44,6 +51,7 @@ public:
 		}
 		this->last = newNode;
 		this->last->mNext = nullptr;
+		count++;
 	}
 
 
@@ -61,6 +69,7 @@ public:
 			holdUp = currCheck->mNext;
 			currCheck->mNext = holdUp->mNext;
 			delete &holdUp;
+			count--;
 		}
 	}
 };

@@ -50,15 +50,7 @@ public:
 
 	int length() const
 	{
-		Node<T>* currPlace = new Node<T>;
-		currPlace = this->first;
-		int counter = 0;
-		while (currPlace != nullptr)
-		{
-			counter++;
-			currPlace = currPlace->mNext;
-		}
-		return counter;
+		return count;
 	}
 
 	void destroyList()
@@ -69,6 +61,7 @@ public:
 			Node<T>*holdUp = this->first;
 			this->first = holdUp->mNext;
 			delete holdUp;
+			count = 0;
 		}
 	}
 	// empties the entire list
