@@ -228,12 +228,13 @@ void TestGame::update(float deltaTime)
 
 	if (beefyboi <= -3000)//Juan added
 	{
-		beefyboi = 1200; //Juan added
+		beefyboi = 1200; //Juan added //is 1200
 		beefyboiY = rand() % 550 + 150;//Juan added
 	}
 
 	// healthyboi stuff
 
+	
 	
 
 	
