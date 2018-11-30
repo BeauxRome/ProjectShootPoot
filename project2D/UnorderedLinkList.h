@@ -68,7 +68,7 @@ public:
 			Node<T>* holdUp = new Node<T>;
 			holdUp = currCheck->mNext;
 			currCheck->mNext = holdUp->mNext;
-			delete &holdUp;
+			delete holdUp;
 			count--;
 		}
 	}

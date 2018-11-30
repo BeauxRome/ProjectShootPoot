@@ -125,8 +125,9 @@ void TestGame::update(float deltaTime)
 	////////////
 
 	//This will be for the firng of the projectile
+	int bulletdelay = 0;
 
-	if (input->isKeyDown(aie::INPUT_KEY_SPACE))//Juan added
+	if (input->wasKeyPressed(aie::INPUT_KEY_SPACE))//Juan added
 	{
 		Bullet* newBullet=new Bullet;
 		
@@ -134,7 +135,7 @@ void TestGame::update(float deltaTime)
 		newBullet->position->setY (m_shipY);
 		bulletClub.insertFirst(*newBullet);
 
-		int bulletdelay = 0;
+		
 
 		if (bulletdelay <= 10000)
 		{
@@ -151,6 +152,25 @@ void TestGame::update(float deltaTime)
 			int bulletdelay = 0;
 		}
 	}
+
+	if (bulletClub.length() > 0)
+	{
+		linkedListIterator<Bullet> current = bulletClub.begin();
+
+		for (int i = 0; i <= bulletClub.length(); i++)
+		{
+			Bullet a = *current;
+			a.moveBullet();
+			if (a.position->xCheck() > 1280)
+			{
+				Bullet& pHolder = *current;
+				++current;
+				bulletClub.deleteNode(pHolder);
+				continue;
+			}			
+		}
+	}	
+
 
 	{
 		//if (input->isKeyUp(aie::INPUT_KEY_SPACE))//Juan added
@@ -251,6 +271,7 @@ void TestGame::draw()
 			Bullet a = *current;
 			renderer->setUVRect(0, 0, 1, 1);//Juan added
 			renderer->drawSprite(m_bulletTexture, a.position->xCheck(), a.position->yCheck(), 0, 0, m_rot, 2);//Juan added
+
 			++current;
 		}
 	}
