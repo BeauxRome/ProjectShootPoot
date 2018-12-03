@@ -7,7 +7,6 @@
 #include <iostream>
 #include <ctime>
 
-
 TestGame::TestGame()
 {
 }
@@ -17,7 +16,7 @@ TestGame::~TestGame()
 bool TestGame::startup()
 {
 	renderer = new aie::Renderer2D();
-
+	
 	m_shipTexture = new aie::Texture("./textures/Galaga_Fighter.png");
 	m_base = new aie::Texture("./textures/metriodoBlock.png");
 	m_portal = new aie::Texture("./textures/Eldritch.png");
@@ -34,10 +33,15 @@ bool TestGame::startup()
 	m_shipY = 400;
 	m_bulletX = 600; //Juan added
 	m_bulletY = 400; //Juan added
+	baseHp = 5;
 
 	// Coordinates of enemies
 	badiSpawnX = 1200;
 	badiSpawnY = 400;
+
+	Enemy();
+
+	standard.setCoor();
 
 	m_scoreboard = 0;
 	m_timer = 0;
@@ -125,7 +129,7 @@ void TestGame::update(float deltaTime)
 	////////////
 
 	//This will be for the firng of the projectile
-	int bulletdelay = 0;
+	
 	if (bulletClub.length()<1)
 	{
 		if (input->wasKeyPressed(aie::INPUT_KEY_SPACE))//Juan added
@@ -136,16 +140,17 @@ void TestGame::update(float deltaTime)
 			newBullet->position->setY(m_shipY);
 			bulletClub.insertFirst(*newBullet);
 
-			bulletdelay++;
-
 
 		}
 	}
+
+	//shoot one at a time
 
 	if (bulletClub.length() > 0)
 	{
 		linkedListIterator<Bullet> current = bulletClub.begin();
 
+		//goes through each active bullet
 		for (int i = 0; i <= bulletClub.length(); i++)
 		{
 			Bullet a = *current;
@@ -154,17 +159,43 @@ void TestGame::update(float deltaTime)
 				Bullet& pHolder = *current;
 				++current;
 				bulletClub.deleteNode(pHolder);
-				bulletdelay--;
+				
 				continue;
 			}			
-			a.moveBullet();
 
-			if (a->position == enemy.enemyCoor)
+			//hitbox
+
+			if (a.position->xCheck() >= standard.enemyCoor->xCheck()-45&& 
+				a.position->xCheck() <= standard.enemyCoor->xCheck() + 45 &&
+				a.position->yCheck()>=standard.enemyCoor->yCheck() -45&& 
+				a.position->yCheck()<=standard.enemyCoor->yCheck() + 45)
 			{
-				;
+				Bullet& pHolder = *current;
+				++current;
+				bulletClub.deleteNode(pHolder);
+				
+				standard.setCoor();
+				//increase score when I can
+
+
+				continue;
 			}
+
+
+
+			a.moveBullet();
 		}
 	}	
+
+	if (standard.enemyCoor->xCheck() > 190)
+	{
+		standard.enemyCoor->setX(standard.enemyCoor->xCheck() - 3.0f);
+	}
+	else
+	{
+		standard.setCoor();
+		baseHp--;
+	}
 
 
 	{
@@ -194,11 +225,11 @@ void TestGame::update(float deltaTime)
 		badiSpawnX -= 2.5f*SpeedModifier();//Juan added, adjusted by moi
 	}
 
-	if (badiSpawnX <= 0)//Juan added
-	{
-		badiSpawnX = 1280;//Juan added
-		badiSpawnY = rand() % 550 + 150;//Juan added
-	}
+	//if (badiSpawnX <= 0)//Juan added
+	//{
+	//	badiSpawnX = 1280;//Juan added
+	//	badiSpawnY = rand() % 550 + 150;//Juan added
+	//}
 
 	
 	{
@@ -265,7 +296,8 @@ void TestGame::draw()
 		{
 			Bullet a = *current;
 			renderer->setUVRect(0, 0, 1, 1);//Juan added
-			renderer->drawSprite(m_bulletTexture, a.position->xCheck(), a.position->yCheck(), 0, 0, m_rot, 2);//Juan added
+			renderer->drawSprite(m_bulletTexture, a.position->xCheck(), 
+				a.position->yCheck(), 0, 0, m_rot, 2);//Juan added
 
 			++current;
 		}
@@ -277,7 +309,8 @@ void TestGame::draw()
 	renderer->drawSprite(m_base, -175,360,720,720,4.71239,0);
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_basicEnemy, badiSpawnX, badiSpawnY, 45, 45, 1.57f, 1);//Juan added
+	renderer->drawSprite(m_basicEnemy, standard.enemyCoor->xCheck(), 
+		standard.enemyCoor->yCheck(), 45, 45, 1.57f, 1);//Juan added
 
 	// Button does nothing, just exists for the most part
 

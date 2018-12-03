@@ -165,7 +165,6 @@
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ship.cpp" />
     <ClCompile Include="TestGame.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,13 +172,10 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Entity.h" />
     <ClInclude Include="Fast.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkListIterator.h" />
-    <ClInclude Include="Normal.h" />
     <ClInclude Include="Standard.h" />
-    <ClInclude Include="Ship.h" />
     <ClInclude Include="Slow.h" />
     <ClInclude Include="TestGame.h" />
     <ClInclude Include="UnorderedLinkList.h" />

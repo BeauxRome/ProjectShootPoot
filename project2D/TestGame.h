@@ -4,6 +4,7 @@
 #include "UnorderedLinkList.h"
 #include "Bullet.h"
 #include "LinkedList.h"
+#include "Enemy.h"
 
 class TestGame : public aie::Application
 {
@@ -38,7 +39,9 @@ protected:
 	float m_timer;
 	float m_bulletX; //Juan added
 	float m_bulletY; //Juan added
+	int baseHp;
 	UnorderedLinkedList<Bullet> bulletClub;
 	float badiSpawnX; //Juan added
 	float badiSpawnY;//Juan added
+	Enemy standard;
 };    

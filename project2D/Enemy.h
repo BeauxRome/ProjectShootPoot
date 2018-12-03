@@ -1,29 +1,42 @@
 #pragma once
-#include "Entity.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-
-class Enemy : public Entity
+class Enemy
 {
 protected:
-	//destroy the enemy
-	void DestroySelf()
-	{
-		if (m_Health <= 0)
-		{
-			delete this;
-		}
-	}
-	int m_Health;
-	// score speeds ships up
-	virtual float MovementSpeed();
-	//damage that the enemy ship imparts on whatever it hits
-	virtual float DoDamage() = 0;
+	
 	//score/1000
 	//__________
 	//   10     
 	// added to the speed of all enemies
 	int ScoreModifier;
+
 public:
-	// enemy taking damage
-	virtual int TakeDamage() = 0;
+	Vector2D * enemyCoor=new Vector2D;
+
+	void setCoor()
+	{
+		srand(time(NULL));
+		enemyCoor->setX(1280.0f);//Juan added
+		enemyCoor->setY(rand() % 225 + 75 + rand() % 225 + 75);//Juan added
+	}
+
+	Enemy()
+	{
+		srand(time(NULL));
+		enemyCoor->setX(1280.0f);//Juan added
+		enemyCoor->setY(rand() % 550 + 150);//Juan added;
+	}
+
+	~Enemy()
+	{
+		;
+	}
+
+	void movementSpd()
+	{
+		enemyCoor->setX(enemyCoor->xCheck() + 50);
+	}
 };
