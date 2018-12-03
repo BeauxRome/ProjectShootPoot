@@ -59,11 +59,16 @@ public:
 	{
 		Node<T>*currCheck = new Node<T>;
 		currCheck = this->first;
-		while (currCheck->mNext->mData != target && currCheck->mNext != nullptr)
+		while (currCheck->mData != target )
 		{
-			currCheck = currCheck->mNext;
+			if (currCheck->mNext != nullptr)
+			{
+				currCheck = currCheck->mNext;
+				continue;
+			}
+			break;
 		}
-		if (currCheck->mNext->mData == target)
+		if (currCheck->mData == target)
 		{
 			Node<T>* holdUp = new Node<T>;
 			holdUp = currCheck->mNext;

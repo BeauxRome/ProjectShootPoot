@@ -39,6 +39,6 @@ protected:
 	float m_bulletX; //Juan added
 	float m_bulletY; //Juan added
 	UnorderedLinkedList<Bullet> bulletClub;
-	float badiSpawn; //Juan added
+	float badiSpawnX; //Juan added
 	float badiSpawnY;//Juan added
 };    

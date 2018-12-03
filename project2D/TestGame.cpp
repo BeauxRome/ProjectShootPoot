@@ -36,7 +36,7 @@ bool TestGame::startup()
 	m_bulletY = 400; //Juan added
 
 	// Coordinates of enemies
-	badiSpawn = 1200;
+	badiSpawnX = 1200;
 	badiSpawnY = 400;
 
 	m_scoreboard = 0;
@@ -126,30 +126,19 @@ void TestGame::update(float deltaTime)
 
 	//This will be for the firng of the projectile
 	int bulletdelay = 0;
-
-	if (input->wasKeyPressed(aie::INPUT_KEY_SPACE))//Juan added
+	if (bulletClub.length()<1)
 	{
-		Bullet* newBullet=new Bullet;
-		
-		newBullet->position->setX (m_shipX);
-		newBullet->position->setY (m_shipY);
-		bulletClub.insertFirst(*newBullet);
-
-		
-
-		if (bulletdelay <= 10000)
+		if (input->wasKeyPressed(aie::INPUT_KEY_SPACE))//Juan added
 		{
-			bulletdelay += deltaTime;
-		}
-		else
-		{
-			Bullet* newBullet=new Bullet;
-			
+			Bullet* newBullet = new Bullet;
+
 			newBullet->position->setX(m_shipX);
 			newBullet->position->setY(m_shipY);
 			bulletClub.insertFirst(*newBullet);
 
-			int bulletdelay = 0;
+			bulletdelay++;
+
+
 		}
 	}
 
@@ -160,14 +149,20 @@ void TestGame::update(float deltaTime)
 		for (int i = 0; i <= bulletClub.length(); i++)
 		{
 			Bullet a = *current;
-			a.moveBullet();
 			if (a.position->xCheck() > 1280)
 			{
 				Bullet& pHolder = *current;
 				++current;
 				bulletClub.deleteNode(pHolder);
+				bulletdelay--;
 				continue;
 			}			
+			a.moveBullet();
+
+			if (a->position == enemy.enemyCoor)
+			{
+				;
+			}
 		}
 	}	
 
@@ -196,12 +191,12 @@ void TestGame::update(float deltaTime)
 	int random = rand();
 	if (m_shipX <= 1120) //Juan added
 	{
-		badiSpawn -= 2.5f*SpeedModifier();//Juan added, adjusted by moi
+		badiSpawnX -= 2.5f*SpeedModifier();//Juan added, adjusted by moi
 	}
 
-	if (badiSpawn <= 0)//Juan added
+	if (badiSpawnX <= 0)//Juan added
 	{
-		badiSpawn = 1280;//Juan added
+		badiSpawnX = 1280;//Juan added
 		badiSpawnY = rand() % 550 + 150;//Juan added
 	}
 
@@ -282,7 +277,7 @@ void TestGame::draw()
 	renderer->drawSprite(m_base, -175,360,720,720,4.71239,0);
 
 	renderer->setUVRect(0, 0, 1, 1);//Juan added
-	renderer->drawSprite(m_basicEnemy, badiSpawn, badiSpawnY, 45, 45, 1.57f, 1);//Juan added
+	renderer->drawSprite(m_basicEnemy, badiSpawnX, badiSpawnY, 45, 45, 1.57f, 1);//Juan added
 
 	// Button does nothing, just exists for the most part
 
