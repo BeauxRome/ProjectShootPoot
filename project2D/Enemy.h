@@ -5,13 +5,6 @@
 
 class Enemy
 {
-protected:
-	
-	//score/1000
-	//__________
-	//   10     
-	// added to the speed of all enemies
-	int ScoreModifier;
 
 public:
 	Vector2D * enemyCoor=new Vector2D;

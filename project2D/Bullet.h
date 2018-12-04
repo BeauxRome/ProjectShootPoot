@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector2D.h"
-#include "Standard.h"
+
 
 struct Bullet
 {
@@ -18,7 +18,7 @@ struct Bullet
 		
 	}
 
-
+	//What it says on the tin
 	void moveBullet();
 
 	bool operator == (const Bullet &rhs) const

@@ -22,7 +22,9 @@ bool TestGame::startup()
 	m_portal = new aie::Texture("./textures/Eldritch.png");
 	m_bulletTexture = new aie::Texture("./textures/bullet.png");//Juan added
 	m_basicEnemy = new aie::Texture("./textures/enemy.png");//Juan added
-	m_font = new aie::Font("./font/consolas.ttf", 32);
+	m_font = new aie::Font("./font/consolas.ttf", 26);
+	m_subtlety = new aie::Font("./font/consolas.ttf", 18);
+	m_gameOver = new aie::Texture("./textures/GameOver.png");// Juamn added
 	bulletClub = UnorderedLinkedList<Bullet>();
 	// Coordinates of camera
 	m_cameraX = 0;
@@ -34,10 +36,11 @@ bool TestGame::startup()
 	m_bulletX = 600; //Juan added
 	m_bulletY = 400; //Juan added
 	baseHp = 5;
+	shipHp = 3;
 
 	// Coordinates of enemies
-	badiSpawnX = 1200;
-	badiSpawnY = 400;
+	//badiSpawnX = 1200;
+	//badiSpawnY = 400;
 
 	Enemy();
 
@@ -61,6 +64,7 @@ void TestGame::shutdown()
 	delete m_base;
 	delete m_bulletTexture;//Juan added
 	delete m_basicEnemy; //Juan added
+	delete m_gameOver;//Juan added
 	delete renderer;
 }
 
@@ -70,22 +74,10 @@ void TestGame::update(float deltaTime)
 	m_timer += deltaTime;
 
 
-	// input example
+	
 	aie::Input* input = aie::Input::getInstance();
 
-	// use arrow keys to move camera
-	if (input->isKeyDown(aie::INPUT_KEY_UP))
-		m_cameraY += 500.0f * deltaTime;
-
-	if (input->isKeyDown(aie::INPUT_KEY_DOWN))
-		m_cameraY -= 500.0f * deltaTime;
-
-	if (input->isKeyDown(aie::INPUT_KEY_LEFT))
-		m_cameraX -= 500.0f * deltaTime;
-
-	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
-		m_cameraX += 500.0f * deltaTime;
-
+	
 	// WASD will move the ship, I guess (for the time being)
 	if (m_shipY <= 695)
 	{
@@ -144,7 +136,7 @@ void TestGame::update(float deltaTime)
 		}
 	}
 
-	//shoot one at a time
+	//This is the process of the bullets
 
 	if (bulletClub.length() > 0)
 	{
@@ -163,7 +155,7 @@ void TestGame::update(float deltaTime)
 				continue;
 			}			
 
-			//hitbox
+			//Ghetto hitbox for enemy and bullet
 
 			if (a.position->xCheck() >= standard.enemyCoor->xCheck()-45&& 
 				a.position->xCheck() <= standard.enemyCoor->xCheck() + 45 &&
@@ -175,7 +167,7 @@ void TestGame::update(float deltaTime)
 				bulletClub.deleteNode(pHolder);
 				
 				standard.setCoor();
-				//increase score when I can
+				m_scoreboard += 100;
 
 
 				continue;
@@ -187,9 +179,11 @@ void TestGame::update(float deltaTime)
 		}
 	}	
 
+	//If the Enemy goes too far, Base takes damage
+
 	if (standard.enemyCoor->xCheck() > 190)
 	{
-		standard.enemyCoor->setX(standard.enemyCoor->xCheck() - 3.0f);
+		standard.enemyCoor->setX(standard.enemyCoor->xCheck() - 3.0f*SpeedModifier());
 	}
 	else
 	{
@@ -197,69 +191,15 @@ void TestGame::update(float deltaTime)
 		baseHp--;
 	}
 
+	// If the 2 ships crash into each other
 
+	if (m_shipX >= standard.enemyCoor->xCheck() - 45 &&
+		m_shipX <= standard.enemyCoor->xCheck() + 45 &&
+		m_shipY >= standard.enemyCoor->yCheck() - 45 &&
+		m_shipY <= standard.enemyCoor->yCheck() + 45)
 	{
-		//if (input->isKeyUp(aie::INPUT_KEY_SPACE))//Juan added
-		//{
-		//	if (m_bulletX <= 1280 && m_bulletX != m_shipX)
-		//	{
-		//		m_bulletX += 25.0f;//Juan added
-		//	}
-		//}
-
-		//if (m_bulletX >= 1280)
-		//{
-		//	m_bulletX = m_shipX; //Juan added
-		//	m_bulletY = m_shipY; //Juam added
-
-		//}
-	}
-	////////////
-
-	//Enemy Stuff
-
-	srand(time(0));
-	int random = rand();
-	if (m_shipX <= 1120) //Juan added
-	{
-		badiSpawnX -= 2.5f*SpeedModifier();//Juan added, adjusted by moi
-	}
-
-	//if (badiSpawnX <= 0)//Juan added
-	//{
-	//	badiSpawnX = 1280;//Juan added
-	//	badiSpawnY = rand() % 550 + 150;//Juan added
-	//}
-
-	
-	{
-		////
-
-		////////THIS IS HOPEFULLY GOING TO BE PUT IN WHEN THINGS ARE SET
-
-		//while (currentBullet != nullptr)
-		//{
-		//	if (m_bulletX <= badiSpawn - 100 && m_bulletX >= badiSpawn + 100 &&
-		//		m_bulletY <= badiSpawnY - 100 && m_bulletY <= badiSpawnY + 100)
-		//	{
-		//		badiSpawn == 1200;
-		//	}
-
-		//	if (currentBullet.xCheck() <= badiSpawn - 100 && currentBullet.xCheck() >= badiSpawn + 100
-		//		&& currentBullet.yCheck() <= badiSpawnY - 100 && currentBullet.yCheck() <= badiSpawnY + 100)
-		//	{
-		//		deleteNode(currentBullet);
-		//		badiSpawn = 1280;
-		//		badiSpawnY = rand() % 550 + 150;//Juan added
-		//		m_scoreboard += 100;
-		//	}
-		//	else
-		//	{
-		//		currentBullet = currentBullet->next;
-		//	}
-		//}
-
-		////
+		standard.setCoor();
+		shipHp--;
 	}
 
 
@@ -280,13 +220,10 @@ void TestGame::draw()
 	renderer->setUVRect(0, 0, 1, 1);
 	renderer->drawSprite(m_shipTexture, m_shipX, m_shipY, 50, 50, 4.71239, 1);
 					  
-	renderer->setUVRect(0,0,1,1);	
+	// Indicates portal location	
 	renderer->drawSprite(m_portal, 1230, 360, (720/108)*m_portal->getWidth(), 920);
 
 	//Create a loop that will print each bullet on the screen, avoiding the nullptr
-
-
-	////IT'S ALSO BROKEN AS FUCK. Shit's fucked
 
 	if (bulletClub.length() > 0)
 	{
@@ -295,7 +232,6 @@ void TestGame::draw()
 		for (int i=0;i<=bulletClub.length();i++)
 		{
 			Bullet a = *current;
-			renderer->setUVRect(0, 0, 1, 1);//Juan added
 			renderer->drawSprite(m_bulletTexture, a.position->xCheck(), 
 				a.position->yCheck(), 0, 0, m_rot, 2);//Juan added
 
@@ -303,21 +239,64 @@ void TestGame::draw()
 		}
 	}
 
-	////
+	//// Base indicator
 
-	renderer->setUVRect(0, 0, 1, 1);
 	renderer->drawSprite(m_base, -175,360,720,720,4.71239,0);
 
-	renderer->setUVRect(0, 0, 1, 1);//Juan added
+	//// Enemy Sprite
 	renderer->drawSprite(m_basicEnemy, standard.enemyCoor->xCheck(), 
-		standard.enemyCoor->yCheck(), 45, 45, 1.57f, 1);//Juan added
+		standard.enemyCoor->yCheck(), 45, 45, 1.57f, 0);//Juan added
 
-	// Button does nothing, just exists for the most part
+	//Lives Display
 
-	if (ImGui::Button("hello world"))
+
+	if (shipHp > 0)
 	{
+		renderer->drawSprite(m_shipTexture, 200, 695, 25, 25, 0, 0);
+	}
+	if (shipHp > 1)
+	{
+		renderer->drawSprite(m_shipTexture, 250, 695, 25, 25, 0, 0);
+	}
+	if (shipHp > 2)
+	{
+		renderer->drawSprite(m_shipTexture, 300, 695, 25, 25, 0, 0);
+	}
 
-	}	
+	//Base HP Display
+
+	if (baseHp == 5)
+	{
+		renderer->drawText(m_font, "Base: 5", 1000, 700, 0);
+	}
+	
+	if (baseHp == 4)
+	{
+		renderer->drawText(m_font, "Base: 4", 1000, 700, 0);
+	}
+
+	if (baseHp == 3)
+	{
+		renderer->drawText(m_font, "Base: 3", 1000, 700, 0);
+	}
+
+	if (baseHp == 2)
+	{
+		renderer->drawText(m_font, "Base: 2", 1000, 700, 0);
+	}
+
+	if (baseHp == 1)
+	{
+		renderer->drawText(m_font, "Base: 1", 1000, 700, 0);
+	}
+
+	//GAME OVER
+	if (shipHp <= 0 || baseHp <= 0)
+	{
+		renderer->drawSprite(m_gameOver, 630, 360, 1300, 720, 0, 0);
+		renderer->drawText(m_subtlety, "(Press ESC to exit the game)", 480, 50, 0);
+	}
+
 
 	renderer->end();
 }

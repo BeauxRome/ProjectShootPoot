@@ -55,13 +55,19 @@ public:
 
 	void destroyList()
 	{
-
-		while (this->first != nullptr)
+		if (this->first != nullptr)
 		{
-			Node<T>*holdUp = this->first;
-			this->first = holdUp->mNext;
-			delete holdUp;
-			count = 0;
+			while (this->first != nullptr)
+			{
+				Node<T>*holdUp = this->first;
+				this->first = holdUp->mNext;
+				delete holdUp;
+				count = 0;
+			}
+		}
+		else
+		{
+			return;
 		}
 	}
 	// empties the entire list

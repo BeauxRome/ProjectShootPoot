@@ -6,6 +6,8 @@ protected:
 	float yCoor;
 	float xCoor;
 public:
+
+	//Gives the x and y coordinates difinition
 	void setY(float yVal)
 	{
 		yCoor = yVal;
@@ -15,6 +17,8 @@ public:
 		xCoor=xVal;
 	}
 
+
+	//Checks the x and y coordinates, since they are protected
 	float yCheck()
 	{
 		return yCoor;
@@ -22,16 +26,6 @@ public:
 	float xCheck()
 	{
 		return xCoor;
-	}
+	}sssss
 	
-	float yMove(float shiftNum)
-	{
-		yCoor = yCoor + shiftNum;
-		return yCoor;
-	}
-	float xMove(float shiftNum)
-	{
-		xCoor = xCoor + shiftNum;
-		return xCoor;
-	}
 };

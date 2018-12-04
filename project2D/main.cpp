@@ -1,4 +1,4 @@
-#include "Application2D.h"
+
 #include "TestGame.h"
 int main() {
 	

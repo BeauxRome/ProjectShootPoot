@@ -17,7 +17,7 @@ public:
 	virtual void update(float deltaTime) override;
 	virtual void draw() override;
 
-	//extra
+
 
 	int SpeedModifier();
 
@@ -26,11 +26,13 @@ public:
 protected:
 	
 	aie::Font*			m_font;
+	aie::Font*			m_subtlety;
 	aie::Texture*		m_shipTexture;
 	aie::Texture*		m_base;
 	aie::Texture*		m_bulletTexture;// Juan added
 	aie::Texture*		m_basicEnemy;
 	aie::Texture*		m_portal;
+	aie::Texture*		m_gameOver;
 
 	float m_cameraX, m_cameraY;
 	float m_shipX, m_shipY;
@@ -40,8 +42,7 @@ protected:
 	float m_bulletX; //Juan added
 	float m_bulletY; //Juan added
 	int baseHp;
+	int shipHp;
 	UnorderedLinkedList<Bullet> bulletClub;
-	float badiSpawnX; //Juan added
-	float badiSpawnY;//Juan added
 	Enemy standard;
 };    
