@@ -1,15 +1,13 @@
-#pragma once
-#include "Enemy.h"
-
-class Normie : public Enemy
-{
-private:
-	int m_Health = 1;
-
-public:
-	float MovementSpeed()
-	{
-
-	}
-	//ScoreModifier
-};
+//#pragma once
+//#include "Enemy.h"
+//
+//struct Standard : public Enemy
+//{	
+//	Vector2D* enemyCoor;
+//
+//	void MovementSpeed()
+//	{
+//		enemyCoor->setX(enemyCoor->xCheck()+);
+//	}
+//	//ScoreModifier
+//};
