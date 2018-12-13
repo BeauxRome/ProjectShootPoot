@@ -15,45 +15,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ship.cpp">
+    <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TestGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Fast.h">
+    <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Normal.h">
+    <ClInclude Include="Vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Slow.h">
+    <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
+    <ClInclude Include="LinkListIterator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ship.h">
+    <ClInclude Include="UnorderedLinkList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Standard.h">
+    <ClInclude Include="Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
